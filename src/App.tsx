@@ -1,30 +1,38 @@
-import { Toaster } from 'sileo';
-import { Desktop } from './components/os/Desktop';
-import { Dock } from './components/os/Dock';
-import { TopBar } from './components/os/TopBar';
+/**
+ * @fileoverview Application root component.
+ * Implements adaptive loading to render the DesktopOS or MobileOS
+ * environment based on device detection.
+ */
+
+import React, { Suspense } from 'react';
+import { useIsMobile } from './hooks/useIsMobile';
+
+// Importación dinámica de los entornos completos (Code-Splitting)
+const DesktopOS = React.lazy(() => import('./components/os/DesktopOS').then(m => ({ default: m.DesktopOS })));
+const MobileOS = React.lazy(() => import('./components/mobile/MobileOS'));
 
 function App() {
+  const isMobile = useIsMobile();
+
+  // Mantenemos la Toaster aquí arriba para que ambos entornos la usen
+  // Pero Sileo exige que su contexto esté en el mismo árbol de renderizado,
+  // por lo que cada OS debe tener su propio proveedor internamente.
+
   return (
     <main className="relative w-full h-screen overflow-hidden text-white selection:bg-blue-500/30">
-      {/* Proveedor de notificaciones configurado:
-        - position: Esquina superior derecha.
-        - offset/style: Margen superior de 40px para librar la TopBar (32px).
-        - zIndex: 99999 para que sobreescriba el z-[9999] de la TopBar y el Dock.
-      */}
-      <Toaster
-        position="top-right"
-        offset="40px"
-        style={{ marginTop: '40px', zIndex: 99999 }}
-      />
-
-      {/* Barra de menú superior */}
-      <TopBar />
-
-      {/* Capa de ventanas y fondo con rayos */}
-      <Desktop />
-
-      {/* Interfaz estática inferior */}
-      <Dock />
+      {/* Carga Adaptativa: Renderizado condicional del OS completo */}
+      <Suspense fallback={
+        // Spinner premium centralizado durante la carga de cualquier OS
+        <div className="w-full h-full flex items-center justify-center bg-[#030303]">
+          <div className="w-6 h-6 border-2 border-white/20 border-t-yellow-400 rounded-full animate-spin" />
+        </div>
+      }>
+        {isMobile ? (
+          <MobileOS />
+        ) : (
+          <DesktopOS />
+        )}
+      </Suspense>
     </main>
   );
 }
