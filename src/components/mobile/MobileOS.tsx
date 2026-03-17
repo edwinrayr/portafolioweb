@@ -1,8 +1,8 @@
 /**
- * @fileoverview Premium Mobile OS Environment.
- * Features a perfectly balanced Cupertino-style HomeScreen grid, visual Dynamic Island,
- * integrated bottom Dock, and fluid Bottom Sheet app opening animations.
- * Mixes iOS structure with Material You dynamic yellow accents.
+ * @fileoverview Premium Mobile OS Environment - "Neon-Glass" Edition.
+ * Unifies Desktop "Tech" aesthetics with iOS layout structure.
+ * Features monochromatic glass containers, electric yellow icons, 
+ * dynamic glow interactions, and strict TypeScript typing.
  */
 
 import React, { useState } from 'react';
@@ -12,66 +12,87 @@ import { Toaster } from 'sileo';
 import { StatusBar } from './StatusBar';
 import { LightningBackground } from '../os/LightningBackground';
 
-// Importamos los módulos de las aplicaciones
 import About from '../apps/About';
 import Projects from '../apps/Projects';
 import Contact from '../apps/Contact';
 
-const mainApps = [
-    { id: 'about', title: 'Sobre Mí', icon: User, component: About, accent: 'blue-400' },
-    { id: 'projects', title: 'Proyectos', icon: FolderCode, component: Projects, accent: 'green-400' },
-    { id: 'contact', title: 'Contacto', icon: Terminal, component: Contact, accent: 'yellow-400' },
+// 1. Tipado estricto para evitar errores de inferencia en TS
+interface MainAppConfig {
+    id: string;
+    title: string;
+    icon: React.ElementType;
+    component: React.FC;
+}
+
+interface DockAppConfig {
+    id: string;
+    icon: React.ElementType;
+    url: string;
+}
+
+// Configuración unificada "tech" con tipado
+const mainApps: MainAppConfig[] = [
+    { id: 'about', title: 'Sobre Mí', icon: User, component: About },
+    { id: 'projects', title: 'Proyectos', icon: FolderCode, component: Projects },
+    { id: 'contact', title: 'Contacto', icon: Terminal, component: Contact },
 ];
 
-// Apps solo para el Dock (sin componentes abiertos)
-const dockApps = [
+const dockApps: DockAppConfig[] = [
     { id: 'linkedin', icon: Linkedin, url: 'https://www.linkedin.com/in/edraya-reyna' },
     { id: 'github', icon: Github, url: 'https://github.com/edwinrayr' }
-]
+];
 
 export const MobileOS: React.FC = () => {
-    // En móvil solo permitimos una app abierta a la vez
     const [activeApp, setActiveApp] = useState<string | null>(null);
-
     const ActiveComponent = mainApps.find((a) => a.id === activeApp)?.component;
 
     return (
-        <div className="relative w-full h-full overflow-hidden bg-black text-white flex flex-col selection:bg-yellow-500/30">
-            {/* Proveedor de notificaciones para móvil (más elegante bajando desde arriba) */}
+        <div className="relative w-full h-full overflow-hidden bg-black text-white flex flex-col selection:bg-yellow-500/30 font-sans">
+            {/* Proveedor de notificaciones unificado con acento amarillo */}
             <Toaster position="top-center" offset="60px" style={{ marginTop: '5px' }} />
 
-            {/* Fondo y Estructura Superior (StatusBar + Dynamic Island Visual) */}
-            <div className="absolute inset-0 z-0 opacity-40">
+            {/* Fondo eléctrico - Visible pero sutil */}
+            <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
                 <LightningBackground />
             </div>
 
-            {/* Fondo visual de Dynamic Island para anclar la StatusBar */}
+            {/* Estructura Superior iOS Style */}
             <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-[120px] h-7 bg-black rounded-full z-50 shadow-[0_4px_30px_rgba(0,0,0,0.5)] border border-white/5" />
             <StatusBar />
 
-            {/* Pantalla de Inicio (Cinematic HomeScreen style) */}
+            {/* Pantalla de Inicio - Nuevo Diseño Tech-Glass */}
             <div className="flex-1 pt-24 px-6 relative z-10 flex flex-col">
-                {/* Título dinámico style Android */}
-                <h1 className="text-3xl font-extrabold text-white tracking-tight mb-8">
-                    Inicio <span className="text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.6)]">Zap</span>
-                </h1>
 
-                <div className="grid grid-cols-4 gap-x-4 gap-y-9 mt-2">
+                {/* Título profesional y limpio */}
+                <div className="mb-10 mt-2">
+                    <h1 className="text-[34px] font-extrabold text-white tracking-tighter leading-tight">
+                        rayr.OS //
+                    </h1>
+                    <p className="text-white/60 text-[15px] font-medium mt-1 tracking-tight">
+                        Unidad de acceso táctil. BIENVENIDO.
+                    </p>
+                </div>
+
+                {/* Grid de Aplicaciones "Neon-Glass" */}
+                <div className="grid grid-cols-4 gap-x-4 gap-y-10 mt-2">
                     {mainApps.map((app) => {
                         const Icon = app.icon;
                         return (
                             <motion.button
                                 key={app.id}
                                 onClick={() => setActiveApp(app.id)}
-                                whileTap={{ scale: 0.9 }}
-                                className="flex flex-col items-center gap-2.5 group outline-none"
+                                whileTap={{
+                                    scale: 0.94,
+                                    boxShadow: "0px 0px 25px 3px rgba(250, 204, 21, 0.4)"
+                                }}
+                                className="flex flex-col items-center gap-3 group outline-none"
                             >
-                                {/* Icon Container with dynamic glow */}
-                                <div className={`relative w-[65px] h-[65px] bg-white/[0.03] backdrop-blur-3xl border border-white/[0.12] rounded-[1.6rem] flex items-center justify-center shadow-[inset_0_1px_0_0_rgba(255,255,255,0.02)] active:border-yellow-500/30 transition-all duration-300`}>
-                                    <div className={`absolute -inset-1 bg-${app.accent}/20 rounded-[1.8rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity`} />
-                                    <Icon className={`relative w-9 h-9 text-${app.accent} drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]`} strokeWidth={1.2} />
+                                <div className="relative w-[65px] h-[65px] rounded-[1.4rem] bg-white/[0.015] backdrop-blur-2xl border border-white/[0.06] flex items-center justify-center shadow-lg transition-all duration-300 group-hover:border-yellow-400/30 group-hover:bg-white/[0.04]">
+                                    <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent rounded-[1.4rem] pointer-events-none" />
+                                    <Icon className="relative w-8 h-8 text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]" strokeWidth={1.2} />
                                 </div>
-                                <span className="text-[12px] font-medium text-white/90 drop-shadow-md tracking-tight">
+
+                                <span className="text-[12px] font-medium text-white/80 drop-shadow-md tracking-tight">
                                     {app.title}
                                 </span>
                             </motion.button>
@@ -79,61 +100,74 @@ export const MobileOS: React.FC = () => {
                     })}
                 </div>
 
-                {/* Dock inferior (iOS Style) - Ocupa la última parte de la pantalla */}
+                {/* Dock inferior Unificado */}
                 <div className="mt-auto mb-10 mx-auto w-full max-w-[320px]">
-                    <div className="flex items-center justify-center gap-5 p-4 bg-white/[0.01] backdrop-blur-3xl border border-white/[0.08] rounded-[2rem] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.02)]">
+                    <div className="flex items-center justify-center gap-5 p-4 bg-white/[0.01] backdrop-blur-3xl border border-white/[0.06] rounded-[2rem] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.01)]">
                         {mainApps.map(app => {
                             const Icon = app.icon;
                             return (
-                                <button key={`${app.id}-dock`} onClick={() => setActiveApp(app.id)} className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center hover:bg-white/10 active:scale-95 transition-all">
-                                    <Icon className={`w-7 h-7 text-${app.accent}`} strokeWidth={1.5} />
-                                </button>
+                                <motion.button
+                                    key={`dock-main-${app.id}`}
+                                    onClick={() => setActiveApp(app.id)}
+                                    whileTap={{ scale: 0.9 }}
+                                    className="relative w-14 h-14 bg-white/5 rounded-[1.2rem] flex items-center justify-center border border-white/5 active:border-yellow-400/20 active:bg-yellow-400/5 transition-all outline-none"
+                                >
+                                    <Icon className="w-6 h-6 text-yellow-400 drop-shadow-[0_0_5px_rgba(250,204,21,0.3)]" strokeWidth={1.5} />
+                                </motion.button>
                             )
                         })}
                         {/* Barra separadora */}
-                        <div className="w-[1px] h-10 bg-white/10 rounded-full" />
+                        <div className="w-[1px] h-10 bg-white/5 rounded-full" />
                         {dockApps.map(app => {
                             const Icon = app.icon;
                             return (
-                                <a key={`${app.id}-dock`} href={app.url} target='_blank' rel='noopener noreferrer' className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center hover:bg-white/10 active:scale-95 transition-all">
-                                    <Icon className={`w-7 h-7 text-white/80`} strokeWidth={1.5} />
-                                </a>
+                                <motion.a
+                                    key={`dock-social-${app.id}`}
+                                    href={app.url}
+                                    target='_blank'
+                                    rel='noopener noreferrer'
+                                    whileTap={{ scale: 0.9 }}
+                                    className="w-14 h-14 bg-white/5 border border-white/5 rounded-[1.2rem] flex items-center justify-center active:bg-white/10 active:border-white/10 transition-all outline-none"
+                                >
+                                    <Icon className="w-6 h-6 text-white/70" strokeWidth={1.5} />
+                                </motion.a>
                             )
                         })}
                     </div>
                 </div>
             </div>
 
-            {/* Aplicación Abierta (Premium Bottom Sheet) */}
+            {/* Bottom Sheet Premium Unificada */}
             <AnimatePresence>
                 {activeApp && ActiveComponent && (
                     <motion.div
-                        initial={{ y: '100%', opacity: 0.5 }}
-                        animate={{ y: '0%', opacity: 1 }}
-                        exit={{ y: '100%', opacity: 0.5 }}
+                        key="mobile-bottom-sheet" // 2. Key requerida por AnimatePresence
+                        initial={{ y: '100%' }}
+                        animate={{ y: '0%' }}
+                        exit={{ y: '100%' }}
                         transition={{ type: 'spring', damping: 28, stiffness: 280, mass: 1 }}
-                        className="absolute inset-x-0 bottom-0 top-12 bg-black/85 backdrop-blur-3xl border-t border-white/[0.12] rounded-t-[2.5rem] z-50 overflow-hidden flex flex-col shadow-[0_-15px_60px_rgba(0,0,0,0.9)]"
+                        className="absolute inset-x-0 bottom-0 top-12 bg-black/90 backdrop-blur-3xl border-t border-white/[0.08] rounded-t-[2.5rem] z-50 overflow-hidden flex flex-col shadow-[0_-15px_60px_rgba(0,0,0,0.9)]"
                     >
-                        {/* Header / Premium Handle (Visual) */}
-                        <div className="w-full pt-4 pb-4 flex flex-col items-center bg-white/[0.02] border-b border-white/[0.08]">
-                            <div className="w-12 h-1.5 bg-white/20 rounded-full mb-4" />
+                        {/* Header / Premium Handle */}
+                        <div className="w-full pt-4 pb-4 flex flex-col items-center border-b border-white/[0.05]">
+                            <div className="w-12 h-1.5 bg-white/15 rounded-full mb-4" />
                             <div className="w-full px-6 flex justify-between items-center relative">
-                                <h2 className="text-[17px] font-bold tracking-wide text-white/95">
+                                <h2 className="text-[17px] font-bold tracking-wide text-white/95 flex items-center gap-2">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 shadow-[0_0_5px_rgba(250,204,21,0.7)]" />
                                     {mainApps.find((a) => a.id === activeApp)?.title}
                                 </h2>
                                 <button
                                     onClick={() => setActiveApp(null)}
-                                    className="p-2 bg-white/10 rounded-full active:bg-white/20 hover:bg-white/15 transition-all"
+                                    className="p-2 bg-white/5 rounded-full active:bg-white/10 border border-white/5 active:border-white/10 transition-all outline-none"
                                     aria-label="Cerrar aplicación"
                                 >
-                                    <X className="w-4 h-4 text-white/90" />
+                                    <X className="w-4 h-4 text-white/80" />
                                 </button>
                             </div>
                         </div>
 
-                        {/* Contenedor del contenido de la App con mejor renderizado */}
+                        {/* Contenedor del contenido de la App */}
                         <div className="flex-1 overflow-y-auto relative bg-transparent [scrollbar-width:none] [&::-webkit-scrollbar]:hidden p-1">
-                            {/* Inyectamos el componente (About, Projects o Contact) */}
                             <ActiveComponent />
                         </div>
                     </motion.div>
@@ -143,5 +177,4 @@ export const MobileOS: React.FC = () => {
     );
 };
 
-// Exportación default para que React.lazy lo pueda importar en App.tsx
 export default MobileOS;
