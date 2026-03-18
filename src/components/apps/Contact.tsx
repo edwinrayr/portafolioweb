@@ -1,14 +1,13 @@
 /**
- * @fileoverview Interactive Terminal Contact module.
- * Features staggered command-line animations, clipboard integration,
- * and quick-action contact buttons updated with real user data.
+ * @fileoverview Interactive Terminal Contact module - "Neon-Glass" Edition.
+ * Features staggered command-line animations, monochromatic tech styling,
+ * electric yellow accents, and glassmorphism quick-action buttons.
  */
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { Mail, Copy, Linkedin, Terminal as TerminalIcon, Github, MessageCircle } from 'lucide-react';
-import { sileo } from 'sileo';
 
 const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -27,16 +26,17 @@ const Contact = () => {
     const [email] = useState('edraya.reyna@gmail.com');
 
     const handleCopyEmail = () => {
-        navigator.clipboard.writeText(email);
-        sileo.success('Correo copiado al portapapeles');
+        navigator.clipboard.writeText(email).then(() => {
+            alert('¡Correo copiado al portapapeles!');
+        });
     };
 
     return (
-        <div className="h-full w-full bg-black/60 p-1 font-mono text-sm overflow-hidden flex flex-col">
+        <div className="h-full w-full bg-black/40 font-mono text-sm overflow-hidden flex flex-col rounded-b-xl">
             {/* Falso Header de Terminal */}
-            <div className="flex items-center gap-2 px-4 py-2 bg-white/[0.05] border-b border-white/[0.1]">
-                <TerminalIcon className="w-4 h-4 text-white/50" />
-                <span className="text-white/50 text-xs tracking-wider">bash - edwin@macbook-pro - 80x24</span>
+            <div className="flex items-center gap-2 px-4 py-2 bg-white/[0.02] border-b border-white/[0.06] shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
+                <TerminalIcon className="w-4 h-4 text-yellow-400 drop-shadow-[0_0_5px_rgba(250,204,21,0.5)]" />
+                <span className="text-white/50 text-[11px] tracking-widest uppercase font-bold">Terminal // rayr.OS - root</span>
             </div>
 
             {/* Cuerpo de la Terminal */}
@@ -44,88 +44,91 @@ const Contact = () => {
                 variants={containerVariants}
                 initial="hidden"
                 animate="show"
-                className="p-5 flex-1 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden flex flex-col"
+                className="p-6 flex-1 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden flex flex-col"
             >
                 <motion.div variants={lineVariants} className="mb-2">
-                    <span className="text-green-400">edwin@macbook-pro</span>
-                    <span className="text-white"> ~ % </span>
-                    <span className="text-white/90">./fetch_contact_info.sh</span>
+                    <span className="text-yellow-400 drop-shadow-[0_0_5px_rgba(250,204,21,0.4)]">admin@rayr.os</span>
+                    <span className="text-white/50"> ~ % </span>
+                    <span className="text-white/90 tracking-wide">./fetch_contact_info.sh</span>
                 </motion.div>
 
-                <motion.div variants={lineVariants} className="mb-4 text-white/50 text-[13px]">
-                    [==================================] 100% Resolviendo dependencias...
+                <motion.div variants={lineVariants} className="mb-5 text-white/40 text-[12px] tracking-widest uppercase">
+                    [==================================] 100% Extrayendo datos...
                 </motion.div>
 
-                <motion.div variants={lineVariants} className="mb-6">
-                    <pre className="text-blue-300 font-mono text-[13px] leading-relaxed whitespace-pre-wrap">
+                <motion.div variants={lineVariants} className="mb-8 relative group">
+                    {/* Efecto de resplandor sutil detrás del JSON */}
+                    <div className="absolute -inset-4 bg-yellow-400/5 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+
+                    <pre className="relative z-10 text-white/70 font-mono text-[13px] leading-relaxed whitespace-pre-wrap pl-2 border-l-2 border-white/10 group-hover:border-yellow-400/50 transition-colors duration-300">
                         {`{
-  "name": "Edwin Raya",
-  "role": "Frontend Developer Jr",
-  "email": "edraya.reyna@gmail.com",
-  "phone": "+52 5582561666",
-  "location": "Estado de México, México",
+  "name": `}<span className="text-yellow-400">"Edwin Raya"</span>{`,
+  "role": `}<span className="text-yellow-400">"Frontend Developer Jr"</span>{`,
+  "email": `}<span className="text-yellow-400">"edraya.reyna@gmail.com"</span>{`,
+  "phone": `}<span className="text-yellow-400">"+52 5582561666"</span>{`,
+  "location": `}<span className="text-yellow-400">"Estado de México, México"</span>{`,
   "socials": {
-    "linkedin": "in/edraya-reyna",
-    "github": "github.com/edwinrayr"
+    "linkedin": `}<span className="text-yellow-400">"in/edraya-reyna"</span>{`,
+    "github": `}<span className="text-yellow-400">"github.com/edwinrayr"</span>{`
   }
 }`}
                     </pre>
                 </motion.div>
 
-                <motion.div variants={lineVariants} className="mb-4">
-                    <span className="text-green-400">edwin@macbook-pro</span>
-                    <span className="text-white"> ~ % </span>
-                    <span className="text-white/90">Selecciona una acción:</span>
-                    <span className="inline-block w-2 h-4 bg-white/80 ml-1 mt-1 animate-pulse align-middle" />
+                <motion.div variants={lineVariants} className="mb-5">
+                    <span className="text-yellow-400 drop-shadow-[0_0_5px_rgba(250,204,21,0.4)]">admin@rayr.os</span>
+                    <span className="text-white/50"> ~ % </span>
+                    <span className="text-white/80">Selecciona un protocolo de comunicación:</span>
+                    <span className="inline-block w-2.5 h-4 bg-yellow-400 ml-1.5 mt-1 animate-pulse align-middle shadow-[0_0_8px_rgba(250,204,21,0.8)]" />
                 </motion.div>
 
-                {/* Botones de Acción Rápida */}
-                <motion.div variants={lineVariants} className="mt-auto pt-2 grid grid-cols-2 gap-3">
+                {/* Botones de Acción Rápida - Diseño Neon-Glass */}
+                <motion.div variants={lineVariants} className="mt-auto pt-2 grid grid-cols-2 gap-3 font-sans">
                     <button
                         onClick={handleCopyEmail}
-                        className="flex items-center justify-center gap-2 py-2.5 px-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl text-white/80 hover:text-white transition-all group"
+                        className="flex items-center justify-center gap-2 py-3 px-3 bg-white/[0.02] border border-white/[0.06] rounded-xl text-white/60 hover:text-yellow-400 hover:bg-yellow-400/10 hover:border-yellow-400/30 hover:shadow-[0_0_15px_rgba(250,204,21,0.2)] transition-all duration-300 group outline-none"
                     >
                         <Copy className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                        <span className="text-[13px]">Copiar Email</span>
+                        <span className="text-[12px] font-semibold tracking-wide uppercase">Copiar Email</span>
                     </button>
 
                     <a
                         href={`mailto:${email}`}
-                        className="flex items-center justify-center gap-2 py-2.5 px-3 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/20 hover:border-blue-500/40 rounded-xl text-blue-400 hover:text-blue-300 transition-all group"
+                        className="flex items-center justify-center gap-2 py-3 px-3 bg-white/[0.02] border border-white/[0.06] rounded-xl text-white/60 hover:text-yellow-400 hover:bg-yellow-400/10 hover:border-yellow-400/30 hover:shadow-[0_0_15px_rgba(250,204,21,0.2)] transition-all duration-300 group outline-none"
                     >
                         <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                        <span className="text-[13px]">Enviar Correo</span>
+                        <span className="text-[12px] font-semibold tracking-wide uppercase">Enviar Correo</span>
                     </a>
 
                     <a
                         href="https://www.linkedin.com/in/edraya-reyna"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 py-2.5 px-3 bg-[#0A66C2]/10 hover:bg-[#0A66C2]/20 border border-[#0A66C2]/20 hover:border-[#0A66C2]/40 rounded-xl text-[#0A66C2] hover:text-blue-400 transition-all group"
+                        className="flex items-center justify-center gap-2 py-3 px-3 bg-white/[0.02] border border-white/[0.06] rounded-xl text-white/60 hover:text-yellow-400 hover:bg-yellow-400/10 hover:border-yellow-400/30 hover:shadow-[0_0_15px_rgba(250,204,21,0.2)] transition-all duration-300 group outline-none"
                     >
                         <Linkedin className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                        <span className="text-[13px]">LinkedIn</span>
+                        <span className="text-[12px] font-semibold tracking-wide uppercase">LinkedIn</span>
                     </a>
 
                     <a
                         href="https://github.com/edwinrayr"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 py-2.5 px-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl text-white/80 hover:text-white transition-all group"
+                        className="flex items-center justify-center gap-2 py-3 px-3 bg-white/[0.02] border border-white/[0.06] rounded-xl text-white/60 hover:text-yellow-400 hover:bg-yellow-400/10 hover:border-yellow-400/30 hover:shadow-[0_0_15px_rgba(250,204,21,0.2)] transition-all duration-300 group outline-none"
                     >
                         <Github className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                        <span className="text-[13px]">GitHub</span>
+                        <span className="text-[12px] font-semibold tracking-wide uppercase">GitHub</span>
                     </a>
 
-                    {/* Botón de WhatsApp - Ocupa ambas columnas para destacar */}
+                    {/* Botón de WhatsApp - Destacado pero respetando el tema */}
                     <a
                         href="https://wa.me/525582561666"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="col-span-2 flex items-center justify-center gap-2 py-2.5 px-3 bg-[#25D366]/10 hover:bg-[#25D366]/20 border border-[#25D366]/20 hover:border-[#25D366]/40 rounded-xl text-[#25D366] hover:text-green-300 transition-all group"
+                        className="col-span-2 flex items-center justify-center gap-2 py-3.5 px-3 bg-white/[0.03] border border-white/[0.08] rounded-xl text-white/80 hover:text-yellow-400 hover:bg-yellow-400/10 hover:border-yellow-400/40 hover:shadow-[0_0_20px_rgba(250,204,21,0.25)] transition-all duration-300 group outline-none"
                     >
                         <MessageCircle className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                        <span className="text-[13px] font-medium">Contactar por WhatsApp</span>
+                        <span className="text-[13px] font-bold tracking-widest uppercase">Contactar por WhatsApp</span>
                     </a>
                 </motion.div>
             </motion.div>

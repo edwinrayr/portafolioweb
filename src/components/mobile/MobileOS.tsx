@@ -2,12 +2,13 @@
  * @fileoverview Premium Mobile OS Environment - "Neon-Glass" Edition.
  * Unifies Desktop "Tech" aesthetics with iOS layout structure.
  * Features monochromatic glass containers, electric yellow icons, 
- * dynamic glow interactions, and strict TypeScript typing.
+ * dynamic glow interactions, strict TypeScript typing, and auto-open behavior.
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { User, FolderCode, Terminal, X, Linkedin, Github } from 'lucide-react';
+// Agregamos Instagram y Mail para completar el Dock móvil
+import { User, FolderCode, Terminal, X, Linkedin, Github, Instagram, Mail } from 'lucide-react';
 import { Toaster } from 'sileo';
 import { StatusBar } from './StatusBar';
 import { LightningBackground } from '../os/LightningBackground';
@@ -16,7 +17,7 @@ import About from '../apps/About';
 import Projects from '../apps/Projects';
 import Contact from '../apps/Contact';
 
-// 1. Tipado estricto para evitar errores de inferencia en TS
+// Tipado estricto
 interface MainAppConfig {
     id: string;
     title: string;
@@ -30,40 +31,47 @@ interface DockAppConfig {
     url: string;
 }
 
-// Configuración unificada "tech" con tipado
+// Configuración de la cuadrícula principal (Home Screen)
 const mainApps: MainAppConfig[] = [
     { id: 'about', title: 'Sobre Mí', icon: User, component: About },
     { id: 'projects', title: 'Proyectos', icon: FolderCode, component: Projects },
     { id: 'contact', title: 'Contacto', icon: Terminal, component: Contact },
 ];
 
+// Configuración exclusiva del Dock móvil (Solo redes sociales y contacto)
 const dockApps: DockAppConfig[] = [
     { id: 'linkedin', icon: Linkedin, url: 'https://www.linkedin.com/in/edraya-reyna' },
-    { id: 'github', icon: Github, url: 'https://github.com/edwinrayr' }
+    { id: 'github', icon: Github, url: 'https://github.com/edwinrayr' },
+    { id: 'instagram', icon: Instagram, url: 'https://instagram.com/rayrdev' },
+    { id: 'mail', icon: Mail, url: 'mailto:edraya.reyna@gmail.com' }
 ];
 
 export const MobileOS: React.FC = () => {
     const [activeApp, setActiveApp] = useState<string | null>(null);
     const ActiveComponent = mainApps.find((a) => a.id === activeApp)?.component;
 
+    // AUTO-OPEN DE LA APP "SOBRE MÍ"
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setActiveApp('about');
+        }, 500);
+        return () => clearTimeout(timer);
+    }, []);
+
     return (
         <div className="relative w-full h-full overflow-hidden bg-black text-white flex flex-col selection:bg-yellow-500/30 font-sans">
-            {/* Proveedor de notificaciones unificado con acento amarillo */}
             <Toaster position="top-center" offset="60px" style={{ marginTop: '5px' }} />
 
-            {/* Fondo eléctrico - Visible pero sutil */}
             <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
                 <LightningBackground />
             </div>
 
-            {/* Estructura Superior iOS Style */}
             <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-[120px] h-7 bg-black rounded-full z-50 shadow-[0_4px_30px_rgba(0,0,0,0.5)] border border-white/5" />
             <StatusBar />
 
-            {/* Pantalla de Inicio - Nuevo Diseño Tech-Glass */}
+            {/* Pantalla de Inicio */}
             <div className="flex-1 pt-24 px-6 relative z-10 flex flex-col">
 
-                {/* Título profesional y limpio */}
                 <div className="mb-10 mt-2">
                     <h1 className="text-[34px] font-extrabold text-white tracking-tighter leading-tight">
                         rayr.OS //
@@ -73,7 +81,7 @@ export const MobileOS: React.FC = () => {
                     </p>
                 </div>
 
-                {/* Grid de Aplicaciones "Neon-Glass" */}
+                {/* Grid de Aplicaciones */}
                 <div className="grid grid-cols-4 gap-x-4 gap-y-10 mt-2">
                     {mainApps.map((app) => {
                         const Icon = app.icon;
@@ -100,24 +108,9 @@ export const MobileOS: React.FC = () => {
                     })}
                 </div>
 
-                {/* Dock inferior Unificado */}
+                {/* Dock inferior Móvil - Exclusivo Redes y Contacto */}
                 <div className="mt-auto mb-10 mx-auto w-full max-w-[320px]">
-                    <div className="flex items-center justify-center gap-5 p-4 bg-white/[0.01] backdrop-blur-3xl border border-white/[0.06] rounded-[2rem] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.01)]">
-                        {mainApps.map(app => {
-                            const Icon = app.icon;
-                            return (
-                                <motion.button
-                                    key={`dock-main-${app.id}`}
-                                    onClick={() => setActiveApp(app.id)}
-                                    whileTap={{ scale: 0.9 }}
-                                    className="relative w-14 h-14 bg-white/5 rounded-[1.2rem] flex items-center justify-center border border-white/5 active:border-yellow-400/20 active:bg-yellow-400/5 transition-all outline-none"
-                                >
-                                    <Icon className="w-6 h-6 text-yellow-400 drop-shadow-[0_0_5px_rgba(250,204,21,0.3)]" strokeWidth={1.5} />
-                                </motion.button>
-                            )
-                        })}
-                        {/* Barra separadora */}
-                        <div className="w-[1px] h-10 bg-white/5 rounded-full" />
+                    <div className="flex items-center justify-between px-6 py-4 bg-white/[0.01] backdrop-blur-3xl border border-white/[0.06] rounded-[2rem] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.01)]">
                         {dockApps.map(app => {
                             const Icon = app.icon;
                             return (
@@ -126,8 +119,8 @@ export const MobileOS: React.FC = () => {
                                     href={app.url}
                                     target='_blank'
                                     rel='noopener noreferrer'
-                                    whileTap={{ scale: 0.9 }}
-                                    className="w-14 h-14 bg-white/5 border border-white/5 rounded-[1.2rem] flex items-center justify-center active:bg-white/10 active:border-white/10 transition-all outline-none"
+                                    whileTap={{ scale: 0.9, backgroundColor: "rgba(250, 204, 21, 0.1)", borderColor: "rgba(250, 204, 21, 0.3)" }}
+                                    className="w-[3.25rem] h-[3.25rem] bg-white/5 border border-white/5 rounded-[1.2rem] flex items-center justify-center transition-all outline-none"
                                 >
                                     <Icon className="w-6 h-6 text-white/70" strokeWidth={1.5} />
                                 </motion.a>
@@ -141,7 +134,7 @@ export const MobileOS: React.FC = () => {
             <AnimatePresence>
                 {activeApp && ActiveComponent && (
                     <motion.div
-                        key="mobile-bottom-sheet" // 2. Key requerida por AnimatePresence
+                        key="mobile-bottom-sheet"
                         initial={{ y: '100%' }}
                         animate={{ y: '0%' }}
                         exit={{ y: '100%' }}
@@ -166,7 +159,7 @@ export const MobileOS: React.FC = () => {
                             </div>
                         </div>
 
-                        {/* Contenedor del contenido de la App */}
+                        {/* Contenedor del contenido */}
                         <div className="flex-1 overflow-y-auto relative bg-transparent [scrollbar-width:none] [&::-webkit-scrollbar]:hidden p-1">
                             <ActiveComponent />
                         </div>
