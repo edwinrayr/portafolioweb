@@ -86,4 +86,5 @@ export const Window: React.FC<WindowProps> = ({ id, title, children }) => {
             </div>
         </motion.div>
     );
+
 };
