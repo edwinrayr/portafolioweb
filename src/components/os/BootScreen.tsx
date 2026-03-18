@@ -114,4 +114,5 @@ export const BootScreen: React.FC<BootScreenProps> = ({ onComplete }) => {
             <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_100px_rgba(0,0,0,0.8)]" />
         </motion.div>
     );
+
 };
