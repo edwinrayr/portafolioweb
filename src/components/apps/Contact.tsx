@@ -2,12 +2,13 @@
  * @fileoverview Interactive Terminal Contact module - "Neon-Glass" Edition.
  * Features staggered command-line animations, monochromatic tech styling,
  * electric yellow accents, and glassmorphism quick-action buttons.
+ * Updated with Software Engineer profile and seamless UX interactions.
  */
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import type { Variants } from 'framer-motion';
-import { Mail, Copy, Linkedin, Terminal as TerminalIcon, Github, MessageCircle } from 'lucide-react';
+import { Mail, Copy, Linkedin, Terminal as TerminalIcon, Github, MessageCircle, Check } from 'lucide-react';
 
 const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -24,10 +25,15 @@ const lineVariants: Variants = {
 
 const Contact = () => {
     const [email] = useState('edraya.reyna@gmail.com');
+    const [isCopied, setIsCopied] = useState(false);
 
+    // Sistema de copiado inmersivo sin usar alert()
     const handleCopyEmail = () => {
         navigator.clipboard.writeText(email).then(() => {
-            alert('¡Correo copiado al portapapeles!');
+            setIsCopied(true);
+            setTimeout(() => {
+                setIsCopied(false);
+            }, 2000); // Regresa a la normalidad después de 2 segundos
         });
     };
 
@@ -53,7 +59,7 @@ const Contact = () => {
                 </motion.div>
 
                 <motion.div variants={lineVariants} className="mb-5 text-white/40 text-[12px] tracking-widest uppercase">
-                    [==================================] 100% Extrayendo datos...
+                    [==================================] 100% Extrayendo datos de Ingeniería...
                 </motion.div>
 
                 <motion.div variants={lineVariants} className="mb-8 relative group">
@@ -63,7 +69,8 @@ const Contact = () => {
                     <pre className="relative z-10 text-white/70 font-mono text-[13px] leading-relaxed whitespace-pre-wrap pl-2 border-l-2 border-white/10 group-hover:border-yellow-400/50 transition-colors duration-300">
                         {`{
   "name": `}<span className="text-yellow-400">"Edwin Raya"</span>{`,
-  "role": `}<span className="text-yellow-400">"Frontend Developer Jr"</span>{`,
+  "title": `}<span className="text-yellow-400">"Software Engineer | Frontend Specialist"</span>{`,
+  "degree": `}<span className="text-yellow-400">"Ingeniero en Computación"</span>{`,
   "email": `}<span className="text-yellow-400">"edraya.reyna@gmail.com"</span>{`,
   "phone": `}<span className="text-yellow-400">"+52 5582561666"</span>{`,
   "location": `}<span className="text-yellow-400">"Estado de México, México"</span>{`,
@@ -86,10 +93,22 @@ const Contact = () => {
                 <motion.div variants={lineVariants} className="mt-auto pt-2 grid grid-cols-2 gap-3 font-sans">
                     <button
                         onClick={handleCopyEmail}
-                        className="flex items-center justify-center gap-2 py-3 px-3 bg-white/[0.02] border border-white/[0.06] rounded-xl text-white/60 hover:text-yellow-400 hover:bg-yellow-400/10 hover:border-yellow-400/30 hover:shadow-[0_0_15px_rgba(250,204,21,0.2)] transition-all duration-300 group outline-none"
+                        disabled={isCopied}
+                        className={`flex items-center justify-center gap-2 py-3 px-3 bg-white/[0.02] border rounded-xl transition-all duration-300 group outline-none
+                            ${isCopied 
+                                ? 'border-green-400/50 text-green-400 bg-green-400/10 shadow-[0_0_15px_rgba(74,222,128,0.2)]' 
+                                : 'border-white/[0.06] text-white/60 hover:text-yellow-400 hover:bg-yellow-400/10 hover:border-yellow-400/30 hover:shadow-[0_0_15px_rgba(250,204,21,0.2)]'
+                            }
+                        `}
                     >
-                        <Copy className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                        <span className="text-[12px] font-semibold tracking-wide uppercase">Copiar Email</span>
+                        {isCopied ? (
+                            <Check className="w-4 h-4 scale-110" />
+                        ) : (
+                            <Copy className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                        )}
+                        <span className="text-[12px] font-semibold tracking-wide uppercase">
+                            {isCopied ? '¡Copiado!' : 'Copiar Email'}
+                        </span>
                     </button>
 
                     <a
@@ -101,7 +120,7 @@ const Contact = () => {
                     </a>
 
                     <a
-                        href="https://www.linkedin.com/in/edraya-reyna"
+                        href="https://www.linkedin.com/in/edwinrayr"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center justify-center gap-2 py-3 px-3 bg-white/[0.02] border border-white/[0.06] rounded-xl text-white/60 hover:text-yellow-400 hover:bg-yellow-400/10 hover:border-yellow-400/30 hover:shadow-[0_0_15px_rgba(250,204,21,0.2)] transition-all duration-300 group outline-none"

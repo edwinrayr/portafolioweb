@@ -1,12 +1,12 @@
 /**
  * @fileoverview About Me application module - "Neon-Glass" Edition.
- * Features a perfectly balanced Bento Box grid with dynamic row heights.
- * Monochromatic tech aesthetic with electric yellow interactive accents.
+ * Features a perfectly balanced Bento Box grid (4x4 layout).
+ * Updated for a full Software Engineering profile with extensive project arrays.
  */
 
 import { motion } from 'framer-motion';
 import type { Variants } from 'framer-motion';
-import { MapPin, Code2, Briefcase, Instagram, Github, ArrowUpRight, TerminalSquare } from 'lucide-react';
+import { MapPin, Cpu, Briefcase, Instagram, Github, ArrowUpRight, TerminalSquare, FolderGit2, TestTube2 } from 'lucide-react';
 
 const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -27,6 +27,28 @@ const itemVariants: Variants = {
 };
 
 const About = () => {
+    // --- DATOS DEL PERFIL ---
+    const skills = [
+        { 
+            category: "Lenguajes Core", 
+            items: ["C", "C++", "C#", "Java", "Ensamblador", "Python", "SQL"] 
+        },
+        { 
+            category: "Desarrollo Web", 
+            items: ["React", "Angular", "Astro", "TypeScript", "JavaScript", "Vite", "Tailwind", "Bootstrap", "Node.js"] 
+        },
+        { 
+            category: "Herramientas & Entorno", 
+            items: ["Git", "GitHub", "Antigravity", "Figma", "Docker", "Linux"] 
+        }
+    ];
+
+    const productionProjects = [
+        "eSoft Pasion", "Nedimi", "NedimiPOS", "Dolphin Dive Baja", 
+        "Pinturas el Mezquital", "C&E Page", "Gourmetrica", 
+        "Project Room Bern", "SPIAMV", "ViveToxicFree", "The Money Bridge"
+    ];
+
     return (
         <motion.div
             variants={containerVariants}
@@ -34,19 +56,16 @@ const About = () => {
             animate="show"
             className="p-5 h-full w-full grid grid-cols-4 auto-rows-[160px] gap-4 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
-            {/* Caja 1: Perfil Principal (Dossier) */}
+            {/* 1. Caja: Perfil Principal (Dossier) - [2x2] */}
             <motion.div
                 variants={itemVariants}
                 className="col-span-4 md:col-span-2 row-span-2 bg-white/[0.015] border border-white/[0.06] rounded-[2rem] p-6 relative overflow-hidden group shadow-[inset_0_1px_0_0_rgba(255,255,255,0.02)] flex flex-col justify-between hover:bg-white/[0.03] transition-colors duration-500"
             >
-                {/* Resplandor amarillo sutil en el fondo */}
                 <div className="absolute -top-20 -right-20 w-72 h-72 bg-yellow-500/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-
-                {/* Patrón de cuadrícula tech de fondo (muy sutil) */}
                 <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:20px_20px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_10%,transparent_100%)] pointer-events-none opacity-20" />
 
                 <div className="relative z-10 flex flex-col h-full justify-between">
-                    <div className="flex items-start justify-between mb-4">
+                    <div className="flex items-start justify-between mb-2">
                         <div className="relative">
                             <div className="absolute inset-0 bg-yellow-400/20 blur-xl rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                             <img
@@ -56,81 +75,111 @@ const About = () => {
                             />
                         </div>
 
-                        {/* Etiqueta de estado "Neon" */}
-                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 text-[10px] font-bold tracking-wider uppercase shadow-[0_0_15px_rgba(250,204,21,0.1)] mt-1">
-                            <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 shadow-[0_0_5px_rgba(250,204,21,0.8)] animate-pulse" />
-                            Disponible
+                        <div className="flex flex-col items-end gap-2">
+                            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 text-[10px] font-bold tracking-wider uppercase shadow-[0_0_15px_rgba(250,204,21,0.1)]">
+                                <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 shadow-[0_0_5px_rgba(250,204,21,0.8)] animate-pulse" />
+                                Disponible
+                            </div>
+                            {/* Nuevo Badge de Especialidad */}
+                            <div className="inline-flex px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/60 text-[9px] font-bold tracking-wider uppercase">
+                                Frontend Specialist
+                            </div>
                         </div>
                     </div>
 
                     <div>
-                        <div className="flex items-center gap-2 mb-1">
+                        <div className="flex items-center gap-2 mb-1 mt-2">
                             <TerminalSquare className="w-4 h-4 text-white/30" />
                             <h1 className="text-[30px] leading-tight font-extrabold text-white tracking-tight">
                                 Edwin Raya
                             </h1>
                         </div>
-                        <h2 className="text-[14px] font-medium text-white/80 mb-3 flex items-center gap-2">
+                        <h2 className="text-[13px] font-semibold text-white/80 mb-3 flex items-center gap-2">
                             <Briefcase className="w-4 h-4 text-yellow-400 drop-shadow-[0_0_5px_rgba(250,204,21,0.5)]" />
-                            Ingeniero en Computación <span className="text-white/20">|</span> Frontend Jr
+                            Ingeniero en Computación <span className="text-white/20">|</span> Software Engineer
                         </h2>
-                        <p className="text-[13px] text-white/50 leading-relaxed font-light pr-4 group-hover:text-white/70 transition-colors">
-                            Especializado en la construcción de interfaces web escalables y experiencias de usuario inmersivas. Liderando el desarrollo visual en eSoft Pasion.
+                        <p className="text-[12px] text-white/50 leading-relaxed font-light pr-2 group-hover:text-white/70 transition-colors text-justify">
+                            Desarrollador con visión holística de la tecnología. Especializado en crear interfaces web inmersivas, respaldado por sólidos conocimientos en arquitectura de software, redes, ciberseguridad e Inteligencia Artificial para construir sistemas completos, seguros y escalables.
                         </p>
                     </div>
                 </div>
             </motion.div>
 
-            {/* Caja 2: Tech Stack */}
+            {/* 2. Caja: Ecosistema Técnico (Skills) - [2x2] */}
             <motion.div
                 variants={itemVariants}
-                className="col-span-4 md:col-span-2 row-span-1 bg-white/[0.015] border border-white/[0.06] rounded-[2rem] p-6 flex flex-col justify-center shadow-[inset_0_1px_0_0_rgba(255,255,255,0.02)] group hover:border-white/10 transition-colors"
+                className="col-span-4 md:col-span-2 row-span-2 bg-white/[0.015] border border-white/[0.06] rounded-[2rem] p-6 flex flex-col shadow-[inset_0_1px_0_0_rgba(255,255,255,0.02)] group hover:border-white/10 transition-colors"
             >
-                <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-2 text-white/70 group-hover:text-white/90 transition-colors">
-                        <Code2 className="w-4 h-4 text-yellow-400" />
-                        <h3 className="text-[13px] font-bold tracking-wide uppercase">Tech Stack Principal</h3>
-                    </div>
+                <div className="flex items-center gap-2 text-white/70 group-hover:text-white/90 transition-colors mb-4">
+                    <Cpu className="w-4 h-4 text-yellow-400" />
+                    <h3 className="text-[13px] font-bold tracking-wide uppercase">Core Skills</h3>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                    {['React', 'TypeScript', 'Tailwind v4', 'Vite', 'Framer Motion', 'PHP', 'Git'].map((tech) => (
-                        <span
-                            key={tech}
-                            className="px-3 py-1.5 bg-white/[0.03] border border-white/[0.05] rounded-xl text-[11px] font-medium text-white/60 hover:text-yellow-400 hover:bg-yellow-400/10 hover:border-yellow-400/30 hover:shadow-[0_0_10px_rgba(250,204,21,0.2)] hover:-translate-y-0.5 transition-all duration-300 cursor-default"
-                        >
-                            {tech}
-                        </span>
+                
+                <div className="flex flex-col gap-4 h-full overflow-y-auto pr-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                    {skills.map((skillGroup, idx) => (
+                        <div key={idx}>
+                            <span className="text-[10px] uppercase tracking-widest text-white/40 mb-2 block font-semibold">
+                                {skillGroup.category}
+                            </span>
+                            <div className="flex flex-wrap gap-1.5">
+                                {skillGroup.items.map((tech) => (
+                                    <span
+                                        key={tech}
+                                        className="px-2.5 py-1 bg-white/[0.03] border border-white/[0.05] rounded-lg text-[10px] font-medium text-white/60 hover:text-yellow-400 hover:bg-yellow-400/10 hover:border-yellow-400/30 transition-all duration-300 cursor-default"
+                                    >
+                                        {tech}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
                     ))}
                 </div>
             </motion.div>
 
-            {/* Caja 3: Focus Actual */}
+            {/* 3. Caja: Proyectos y Liderazgo - [2x2] */}
             <motion.div
                 variants={itemVariants}
-                className="col-span-4 md:col-span-2 row-span-1 bg-white/[0.015] border border-white/[0.06] rounded-[2rem] p-5 relative overflow-hidden shadow-[inset_0_1px_0_0_rgba(255,255,255,0.02)] group flex flex-col justify-center hover:bg-white/[0.03] transition-colors"
+                className="col-span-4 md:col-span-2 row-span-2 bg-white/[0.015] border border-white/[0.06] rounded-[2rem] p-5 relative overflow-hidden shadow-[inset_0_1px_0_0_rgba(255,255,255,0.02)] group flex flex-col hover:bg-white/[0.03] transition-colors"
             >
-                <div className="absolute -right-4 -bottom-4 w-32 h-32 bg-yellow-500/5 blur-3xl rounded-full group-hover:bg-yellow-500/10 transition-colors duration-500" />
-                <h3 className="text-[12px] font-bold uppercase tracking-widest text-white/50 mb-3 relative z-10">Procesos Activos</h3>
-                <ul className="space-y-2.5 relative z-10">
-                    <li className="flex items-center gap-3 text-[12px] text-white/80 group/item hover:translate-x-1 transition-transform cursor-default">
-                        <div className="w-1.5 h-1.5 rounded-full bg-yellow-400 shadow-[0_0_8px_rgba(250,204,21,0.8)]" />
-                        <span className="font-medium group-hover/item:text-yellow-400 transition-colors">Rediseño UI/UX Nedimi</span>
-                        <span className="text-yellow-400/50 text-[9px] border border-yellow-400/20 bg-yellow-400/5 px-2 py-0.5 rounded-full ml-auto">Tech Lead</span>
-                    </li>
-                    <li className="flex items-center gap-3 text-[12px] text-white/60 group/item hover:translate-x-1 transition-transform cursor-default">
-                        <div className="w-1.5 h-1.5 rounded-full bg-white/40" />
-                        <span className="font-medium group-hover/item:text-white transition-colors">Dolphin Dive Baja</span>
-                        <span className="text-white/40 text-[9px] border border-white/10 px-2 py-0.5 rounded-full ml-auto">Frontend</span>
-                    </li>
-                    <li className="flex items-center gap-3 text-[12px] text-white/60 group/item hover:translate-x-1 transition-transform cursor-default">
-                        <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
-                        <span className="font-medium group-hover/item:text-white transition-colors">eSoft-Pasion-V3 Core</span>
-                        <span className="text-white/40 text-[9px] border border-white/10 px-2 py-0.5 rounded-full ml-auto">Dev</span>
-                    </li>
-                </ul>
+                <div className="absolute -left-4 -bottom-4 w-32 h-32 bg-yellow-500/5 blur-3xl rounded-full group-hover:bg-yellow-500/10 transition-colors duration-500 pointer-events-none" />
+                
+                <div className="flex items-center justify-between mb-4 relative z-10">
+                    <h3 className="text-[12px] font-bold uppercase tracking-widest text-white/60 flex items-center gap-2">
+                        <FolderGit2 className="w-4 h-4 text-yellow-400" />
+                        Proyectos Liderados
+                    </h3>
+                </div>
+
+                {/* Contenedor scrolleable con máscara de difuminado al final */}
+                <div className="relative h-full overflow-hidden">
+                    <div className="h-full overflow-y-auto pb-8 pr-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden space-y-2 relative z-10">
+                        {/* Categoría: En Producción */}
+                        {productionProjects.map((project, idx) => (
+                            <div key={idx} className="flex items-center gap-3 text-[12px] text-white/70 group/item hover:translate-x-1 transition-transform cursor-default">
+                                <div className="w-1.5 h-1.5 rounded-full bg-yellow-400/50 group-hover/item:bg-yellow-400 group-hover/item:shadow-[0_0_8px_rgba(250,204,21,0.8)] transition-all" />
+                                <span className="font-medium group-hover/item:text-white transition-colors">{project}</span>
+                                <span className="text-white/30 text-[9px] border border-white/5 px-2 py-0.5 rounded-full ml-auto group-hover/item:border-yellow-400/20 group-hover/item:text-yellow-400/70 transition-colors">
+                                    Tech Lead
+                                </span>
+                            </div>
+                        ))}
+
+                        {/* Separador */}
+                        <div className="h-px w-full bg-white/5 my-3" />
+
+                        {/* Categoría: I+D */}
+                        <div className="flex items-center gap-3 text-[12px] text-white/50 group/item hover:translate-x-1 transition-transform cursor-default">
+                            <TestTube2 className="w-3.5 h-3.5 text-blue-400" />
+                            <span className="font-medium group-hover/item:text-white transition-colors">Miguel Servin</span>
+                            <span className="text-blue-400/50 text-[9px] border border-blue-400/20 bg-blue-400/5 px-2 py-0.5 rounded-full ml-auto">I+D</span>
+                        </div>
+                    </div>
+                    {/* Gradiente inferior para indicar que hay más scroll */}
+                    <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-[#030303] to-transparent z-20 pointer-events-none" />
+                </div>
             </motion.div>
 
-            {/* Caja 4: Ubicación */}
+            {/* 4. Caja: Ubicación - [1x1] */}
             <motion.div
                 variants={itemVariants}
                 className="col-span-2 md:col-span-1 row-span-1 bg-white/[0.015] border border-white/[0.06] rounded-[2rem] p-5 flex flex-col items-center justify-center text-center group hover:bg-white/[0.03] hover:border-yellow-400/30 transition-all shadow-[inset_0_1px_0_0_rgba(255,255,255,0.02)] cursor-default"
@@ -140,7 +189,7 @@ const About = () => {
                 <span className="text-[10px] text-white/40 mt-0.5">México</span>
             </motion.div>
 
-            {/* Caja 5: Instagram */}
+            {/* 5. Caja: Instagram - [1x1] */}
             <motion.a
                 href="https://instagram.com/rayrdev"
                 target="_blank"
@@ -153,7 +202,7 @@ const About = () => {
                 <span className="text-[10px] text-white/40 mt-0.5 block">Instagram</span>
             </motion.a>
 
-            {/* Caja 6: GitHub */}
+            {/* 6. Caja: GitHub - [2x1] */}
             <motion.a
                 href="https://github.com/edwinrayr"
                 target="_blank"

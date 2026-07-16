@@ -6,9 +6,11 @@
 
 import { motion } from 'framer-motion';
 import type { Variants } from 'framer-motion';
-import { ExternalLink, Layers, LayoutTemplate, MonitorSmartphone, FolderCode } from 'lucide-react';
+import { 
+    ExternalLink, Layers, LayoutTemplate, MonitorSmartphone, FolderCode, 
+    Terminal, ShoppingCart, PaintBucket, ChefHat, BarChart3, Building2, Wallet 
+} from 'lucide-react';
 
-// Simplificamos la interfaz: eliminamos 'statusColor' ya que unificaremos todo al amarillo eléctrico
 interface ProjectData {
     id: string;
     title: string;
@@ -20,37 +22,109 @@ interface ProjectData {
     techStack: string[];
 }
 
+const baseTechStack = ['React', 'TypeScript', 'Tailwind v4', 'Vite', 'Git', 'GitHub'];
+
 const projectsData: ProjectData[] = [
-    {
-        id: 'esoft',
-        title: 'eSoft Pasion',
-        role: 'Frontend Developer',
-        description: 'Desarrollo core y mantenimiento de la plataforma web principal. Enfoque en arquitectura escalable, rendimiento y renderizado de interfaces modernas.',
-        image: '/img/eSoftWeb.webp',
-        url: 'https://www.esoftpasion.com/',
-        icon: MonitorSmartphone,
-        techStack: ['React', 'TypeScript', 'Tailwind v4', 'Vite'],
-    },
     {
         id: 'nedimi',
         title: 'Nedimi',
         role: 'Tech Lead | UI/UX',
-        description: 'Liderazgo técnico y rediseño completo de la experiencia de usuario (UX) e interfaz visual (UI), elevando los estándares de interacción de la plataforma.',
-        image: '/img/NedimiWeb.webp',
+        description: 'Liderazgo técnico y rediseño completo de la plataforma. Integración de Astro para SEO y tiempos de carga ultrarrápidos, elevando la experiencia de usuario a niveles premium.',
+        image: '/img/NedimiWeb.png',
         url: 'https://nedimi.com/',
         icon: LayoutTemplate,
-        techStack: ['Figma', 'React', 'Frontend Architecture'],
+        techStack: ['Astro', ...baseTechStack],
+    },
+    {
+        id: 'esoft',
+        title: 'eSoft Pasion',
+        role: 'Tech Lead & Frontend',
+        description: 'Desarrollo core y arquitectura del sistema principal. Enfoque en escalabilidad, rendimiento extremo y renderizado de interfaces modernas para optimizar flujos operativos.',
+        image: '/img/eSoftWeb.png',
+        url: 'https://esoftpasion.com/',
+        icon: MonitorSmartphone,
+        techStack: baseTechStack,
+    },
+    {
+        id: 'nedimipos',
+        title: 'NedimiPOS',
+        role: 'Líder Técnico & Frontend',
+        description: 'Arquitectura de un Sistema de Punto de Venta (POS) en la nube. Manejo complejo de estados, transacciones en tiempo real y UI orientada a la máxima velocidad de operación.',
+        image: '/img/NedimiPOSWeb.png',
+        url: 'https://nedimipos.com/',
+        icon: Terminal,
+        techStack: baseTechStack,
     },
     {
         id: 'dolphin',
         title: 'Dolphin Dive Baja',
-        role: 'Frontend Developer',
-        description: 'Desarrollo frontend especializado para la plataforma de buceo. Creación de una experiencia inmersiva, optimizada para reservas y exploración visual.',
-        image: '/img/DolphinWeb.webp',
-        url: 'https://v2dolphin.nedimi.com/',
+        role: 'Tech Lead | Frontend',
+        description: 'Plataforma inmersiva para servicios de buceo. Diseño fluido y responsivo que prioriza la exploración visual y facilita el embudo de conversión para reservas turísticas.',
+        image: '/img/DolphinWeb.png',
+        url: 'https://www.dolphindivebaja.com/',
         icon: Layers,
-        techStack: ['React', 'UI Design', 'Responsive Web'],
+        techStack: baseTechStack,
     },
+    {
+        id: 'mezquital',
+        title: 'Pinturas el Mezquital',
+        role: 'Líder de Proyecto & Frontend',
+        description: 'Solución corporativa y catálogo digital. Construcción de un frontend robusto con transiciones suaves, búsqueda optimizada y presentación dinámica de productos.',
+        image: '/img/MezquitalWeb.png',
+        url: 'https://pinturas-m-hvcs.vercel.app/',
+        icon: PaintBucket,
+        techStack: baseTechStack,
+    },
+    {
+        id: 'cyepage',
+        title: 'C&E Page',
+        role: 'Tech Lead & Frontend',
+        description: 'Desarrollo de presencia digital corporativa. Implementación de animaciones sutiles, estructura semántica perfecta y optimización Core Web Vitals para máximo alcance.',
+        image: '/img/cyeWeb.png',
+        url: 'https://carlosyerika.com.mx/',
+        icon: Building2,
+        techStack: baseTechStack,
+    },
+    {
+        id: 'gourmetrica',
+        title: 'Gourmetrica',
+        role: 'Líder Técnico | UI/UX',
+        description: 'Aplicación web orientada al sector gastronómico. Diseño de interfaces apetitivas, gestión eficiente de datos y construcción de componentes reutilizables para escalabilidad futura.',
+        image: '/img/GourmetricaWeb.png',
+        url: 'https://www.gourmetrica.com/',
+        icon: ChefHat,
+        techStack: baseTechStack,
+    },
+    {
+        id: 'projectroom',
+        title: 'Project Room Bern',
+        role: 'Tech Lead & Frontend',
+        description: 'Espacio digital colaborativo y de exhibición. Foco en la limpieza visual, tipografía precisa y una experiencia de navegación que cede el protagonismo absoluto al contenido.',
+        image: '/img/projectWeb.png',
+        url: 'https://projectroombern.ch/',
+        icon: ShoppingCart,
+        techStack: baseTechStack,
+    },
+    {
+        id: 'spiamv',
+        title: 'SPIAMV',
+        role: 'Líder Técnico & Frontend',
+        description: 'Sistema de gestión integral y monitoreo. Interfaz dashboard rica en datos con gráficos interactivos, garantizando una usabilidad impecable en paneles de control de alta densidad.',
+        image: '/img/spiamvWeb.png',
+        url: 'https://spiamv-website.vercel.app/',
+        icon: BarChart3,
+        techStack: baseTechStack,
+    },
+    {
+        id: 'moneybridge',
+        title: 'The Money Bridge',
+        role: 'Tech Lead | Frontend',
+        description: 'Plataforma financiera y de conexión de capital. Implementación de protocolos de seguridad visual, UI confiable e interacciones fluidas que transmiten solidez institucional.',
+        image: '/img/TheMoneyWeb.png',
+        url: 'https://themoneybridge.com.mx/',
+        icon: Wallet,
+        techStack: baseTechStack,
+    }
 ];
 
 const containerVariants: Variants = {
@@ -109,7 +183,6 @@ const Projects = () => {
                                 <img
                                     src={project.image}
                                     alt={`Captura de ${project.title}`}
-                                    // Efecto de revelado de color y zoom al hacer hover
                                     className="w-full h-full object-cover object-top transition-all duration-700 ease-out grayscale opacity-70 group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-105 group-hover:rotate-[1deg]"
                                     loading="lazy"
                                 />
@@ -144,7 +217,7 @@ const Projects = () => {
                                     </a>
                                 </div>
 
-                                <p className="text-[13px] text-white/50 leading-relaxed font-light mb-6 flex-grow group-hover:text-white/70 transition-colors duration-300">
+                                <p className="text-[13px] text-white/50 leading-relaxed font-light mb-6 flex-grow group-hover:text-white/70 transition-colors duration-300 text-justify">
                                     {project.description}
                                 </p>
 
