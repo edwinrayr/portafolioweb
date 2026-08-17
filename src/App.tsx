@@ -25,7 +25,7 @@ function App() {
         )}
       </AnimatePresence>
 
-      {/* 2. El Sistema Operativo (solo se carga cuando hasBooted es true) */}
+      {/* 2. El Sistema Operativo */}
       {hasBooted && (
         <Suspense fallback={
           <div className="w-full h-full flex items-center justify-center bg-[#030303]">
