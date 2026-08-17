@@ -13,7 +13,7 @@ export const StatusBar: React.FC = () => {
     const time = useTime();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    // Formato 12 horas corto (ej. 10:09 AM)
+    // Formato 12 horas corto
     const formattedTime = time.toLocaleTimeString('es-MX', {
         hour: 'numeric',
         minute: '2-digit',
