@@ -75,7 +75,7 @@ const Contact = () => {
   "phone": `}<span className="text-yellow-400">"+52 5582561666"</span>{`,
   "location": `}<span className="text-yellow-400">"Estado de México, México"</span>{`,
   "socials": {
-    "linkedin": `}<span className="text-yellow-400">"in/edraya-reyna"</span>{`,
+    "linkedin": `}<span className="text-yellow-400">"in/edwinrayr"</span>{`,
     "github": `}<span className="text-yellow-400">"github.com/edwinrayr"</span>{`
   }
 }`}
